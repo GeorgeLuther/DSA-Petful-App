@@ -2,6 +2,47 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Using the app
+
+### Landing Page:
+As a pet lover, I want to visit the FIFO pet adoption site 
+so that I can get more information about the adoption process.
+
+Acceptance criteria
+
+When I go to the FIFO adoption agency site
+
+-[x] I see a description of the adoption process.
+-[x] I see a meaningful picture related to the description.
+-[x] I see a button for starting the adoption process.
+
+### Adoption Page:
+
+As a user interested in adopting pets, I want to get more information 
+on each pet so that I can make an informed decision about who to adopt.
+
+Acceptance criteria
+
+When I visit the adoption page, I can see:
+
+-[] An image of the pet;
+-[] A physical description of the pet;
+-[] The pet's name, gender, age, and breed.
+-[] A story of the pet's journey to the shelter
+
+s a user interested in adopting pets, I want to get in line to adopt.
+
+Acceptance criteria
+
+When I visit the adoption page:
+
+-[] I can see a list of other people currently in line.
+-[] I can submit my name and be added to the end of the line.
+-[] When I am not at the beginning of the line, I cannot see an option to adopt a pet.
+-[] For demo purposes: Once I join the line, I can see other pets being adopted until I am at the front of the line.
+    -[] Every five seconds, the user at the front of the line should be removed from the line and one of the pets up for adoption should disappear.
+    -[] When I am at the front of the line, a new user should be added to the line behind me every five seconds until there are a total of five users in line.
+
 ## Available Scripts
 
 In the project directory, you can run:
