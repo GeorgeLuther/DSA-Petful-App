@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function PetDisplay(props) {
-    
+        console.log(props.animal)
     return props.animal 
             ? (<div className="petDisplay">
                 <img 
@@ -14,7 +14,7 @@ export default function PetDisplay(props) {
                 <p className='age'><b>Age: </b>{props.animal.age}</p>
                 <p className='breed'><b>Breed: </b>{props.animal.breed}</p>
                 <p className='story'><b>{props.animal.name}'s story: </b>{props.animal.story}</p>
-                {props.canAdopt && <button className='adopt'>Adopt Now!</button>}
+                {props.canAdopt && <button className='adopt' type={'button'} onClick={props.handleClickAdopt} id={props.type}>Adopt Now!</button>}
             </div>
             )
             : (<div>

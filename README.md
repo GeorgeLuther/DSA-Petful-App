@@ -1,16 +1,18 @@
 # Petful Client
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Summary
+
+Live Link: https://petful-client-template.georgeluther.vercel.app/
+
+The intent of this app is to connect pets with people. Petful is a first come first serve pet adoption agency. Those who join the waiting list put into a queue. They can then see the available cats and dogs. When it is their turn they are given the choice between the cat and dog that have been in the kennel the longest. 
 
 ## Using the app
 
 ### Landing Page:
-As a pet lover, I want to visit the FIFO pet adoption site 
-so that I can get more information about the adoption process.
+As a pet lover, I can visit the landing page so that I can get more information about the adoption process.
 
-Acceptance criteria
-
-When I go to the FIFO adoption agency site
+When I go to the landing page:
 
 -[x] I see a description of the adoption process.
 -[x] I see a meaningful picture related to the description.
@@ -21,27 +23,41 @@ When I go to the FIFO adoption agency site
 As a user interested in adopting pets, I want to get more information 
 on each pet so that I can make an informed decision about who to adopt.
 
-Acceptance criteria
+When I visit the adoption page, each available pet display shows:
 
-When I visit the adoption page, I can see:
+-[x] An image of the pet;
+-[x] A physical description of the pet;
+-[x] The pet's name, gender, age, and breed.
+-[x] A story of the pet's journey to the shelter
 
--[] An image of the pet;
--[] A physical description of the pet;
--[] The pet's name, gender, age, and breed.
--[] A story of the pet's journey to the shelter
+As a user interested in adopting pets, 
+I want to see the pets that I can adopt.
+- [x] When I visit the adoption page, I can only see the 
+pet that is next in line to be adopted.
 
-s a user interested in adopting pets, I want to get in line to adopt.
+As a user interested in adopting pets, I want to get in line to adopt.
+When I visit the adoption page, there is a waiting list:
 
-Acceptance criteria
+-[x] I can see a list of other people currently in line.
+-[x] I can submit my name and be added to the end of the line.
+-[x] When I am not at the beginning of the line, I cannot see an option to adopt a pet.
+-[x] For demo purposes: Once I join the line, I can see other pets being adopted until I am at the front of the line.
+    -[x] Every five seconds, the user at the front of the line should be removed from the line and one of the pets up for adoption should disappear.
+    -[x] When I am at the front of the line, a new user should be added to the line behind me every five seconds until there are a total of five users in line.
 
-When I visit the adoption page:
+As a user interested in adopting pets, I want to adopt a pet.
+When I am at the front of the line:
 
--[] I can see a list of other people currently in line.
--[] I can submit my name and be added to the end of the line.
--[] When I am not at the beginning of the line, I cannot see an option to adopt a pet.
--[] For demo purposes: Once I join the line, I can see other pets being adopted until I am at the front of the line.
-    -[] Every five seconds, the user at the front of the line should be removed from the line and one of the pets up for adoption should disappear.
-    -[] When I am at the front of the line, a new user should be added to the line behind me every five seconds until there are a total of five users in line.
+- [x] I can see an option to adopt a pet.
+- [x] When I choose to adopt a pet: 
+    -[x] I see a confirmation that I have adopted the pet.
+    -[x] I see my name removed from the line.
+    -[x] I see the pet I adopted is removed from view and replaced with another pet.
+
+    
+## Tech Stack
+
+This project uses JavaScript, React, HTML, and CSS on the front end and Node with express on the backend. There is currently no database, but instead an JS implementation of a queue. The front end is hosted with Vercel and the backend is hosted with Heroku.
 
 ## Available Scripts
 

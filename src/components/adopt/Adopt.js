@@ -28,15 +28,16 @@ export default class Adopt extends Component {
         return Math.floor(Math.random()*(max-min+1))+min 
     }
     flipCoin=()=> this.rand(0,1)
+
     handleChangeName=(e)=>{
         if (e.target.value.trim()) {
             this.setState({userName: e.target.value})
         }
 
     }
+    
     handleClickSignUp=(e)=>{
-        //add person to list,
-        //when username = top name then adopt is possible
+        //add self to waiting list
         e.preventDefault()
         if (this.state.userName) {
             PeopleApiService.addPerson(this.state.userName)
@@ -51,6 +52,24 @@ export default class Adopt extends Component {
             alert('Must type name first')
         }
     }
+    handleClickAdopt=(e)=>{
+        e.preventDefault()
+        PeopleApiService.deletePeople()
+            .then(data => {
+                this.setState({waitingList: data})
+        })
+        PetsApiService.deletePet(e.target.id)
+            .then(data => {
+                this.setState({                  
+                    cat: data.cat,
+                    dog: data.dog,
+                    isLoading: false
+                })
+            })
+
+        this.setState({userName: '', isWaiting: false, canAdopt: false})
+        alert(`You have adopted a ${e.target.id}!!`)
+    }
     componentDidMount(){
         
         this.setState({
@@ -61,10 +80,13 @@ export default class Adopt extends Component {
                 this.setState({
                     cat: data.cat,
                     dog: data.dog,
-                    isLoading: false
+                    isLoadingPets: false
                 })
             })
-            .catch(err => console.log('no pets'))
+            .catch(err => {
+                console.log('no pets')
+                this.setState({isLoadingPets: true})
+            })
         
         PeopleApiService.getPeople()    
             .then(data => {
@@ -72,22 +94,26 @@ export default class Adopt extends Component {
                     waitingList: data
                 })
             })
-            .catch(err => console.log('no people'))
+            .catch(err => {
+                console.log('no people')
+                this.setState({
+                    waitingList: ['Tim Person']
+                })
+            })
     
         setInterval(()=>{
-            //delete a person and pet at a random time
+            //a person and pet are removed from the adoption list roughly every 5 seconds
             if (this.state.userName !== this.state.waitingList[0] && this.state.waitingList.length > 1) {
                 PeopleApiService.deletePeople()
                     .then(data => {
                         this.setState({waitingList: data})
                         if (this.state.userName === data[0]) {
                             this.setState({canAdopt: true})
-                            console.log('can adopt')
                         }
                     })
                     .catch(err => console.log(err))
+
                 let petChoice = this.flipCoin() ? 'cat' : 'dog'
-                
                 PetsApiService.deletePet(petChoice)
                     .then(data => {
                         this.setState({                  
@@ -97,16 +123,18 @@ export default class Adopt extends Component {
                         })
                     })
             }
-
+                
+        }, this.rand(2000, 8000))
+        
+        setInterval(()=>{
+            //a random person is added to the list every 5 seconds
             if (this.flipCoin()) {
                 PeopleApiService.addPerson(randomPerson())
                     .then(data => {
                         this.setState({waitingList: data})
                     })
             }
-                
-        }, this.rand(2000, 8000))
-    
+        }, 5000)
     }
     
     
@@ -125,12 +153,16 @@ export default class Adopt extends Component {
                         ? <p>We're checking the kenel...</p>
                         : <>
                         <PetDisplay 
+                            type={'cat'}
                             animal={this.state.cat}
                             canAdopt={this.state.canAdopt}
+                            handleClickAdopt={this.handleClickAdopt}
                         />
-                        <PetDisplay 
+                        <PetDisplay
+                            type={'dog'}
                             animal={this.state.dog}
                             canAdopt={this.state.canAdopt}
+                            handleClickAdopt={this.handleClickAdopt}
                         />
                     </>}
                 </div>
