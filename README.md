@@ -4,6 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Summary
 
 Live Link: https://petful-client-template.georgeluther.vercel.app/
+Frontend Git: https://github.com/GeorgeLuther/DSA-Petful-API
+Backend Git: https://github.com/GeorgeLuther/DSA-Petful-App
 
 The intent of this app is to connect pets with people. Petful is a first come first serve pet adoption agency. Those who join the waiting list put into a queue. They can then see the available cats and dogs. When it is their turn they are given the choice between the cat and dog that have been in the kennel the longest. 
 
