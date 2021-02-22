@@ -8,3 +8,9 @@ img, .currentPets, .waitingList {
     align-items: center;
     background-image: linear-gradient(75deg,rgb(220, 231, 241),rgb(196, 216, 233)) ;
 }
+
+@media screen and (min-width: 600px) {
+    img {
+        max-width: 600px;
+    }
+} 

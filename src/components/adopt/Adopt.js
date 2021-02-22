@@ -33,7 +33,6 @@ export default class Adopt extends Component {
         if (e.target.value.trim()) {
             this.setState({userName: e.target.value})
         }
-
     }
     
     handleClickSignUp=(e)=>{
@@ -103,32 +102,37 @@ export default class Adopt extends Component {
     
         setInterval(()=>{
             //a person and pet are removed from the adoption list roughly every 5 seconds
+            
             if (this.state.userName !== this.state.waitingList[0] && this.state.waitingList.length > 1) {
-                PeopleApiService.deletePeople()
-                    .then(data => {
-                        this.setState({waitingList: data})
-                        if (this.state.userName === data[0]) {
-                            this.setState({canAdopt: true})
-                        }
-                    })
-                    .catch(err => console.log(err))
-
                 let petChoice = this.flipCoin() ? 'cat' : 'dog'
-                PetsApiService.deletePet(petChoice)
+                if (this.state[petChoice]) {
+                    PetsApiService.deletePet(petChoice)
                     .then(data => {
+                        console.log(data)
                         this.setState({                  
                             cat: data.cat,
                             dog: data.dog,
                             isLoading: false
                         })
                     })
+                    .then(data => {
+                        PeopleApiService.deletePeople()
+                        .then(data => {
+                            this.setState({waitingList: data})
+                            if (this.state.userName === data[0]) {
+                                this.setState({canAdopt: true})
+                            }
+                        })
+                        .catch(err => console.log(err))    
+                    })
+                }
             }
                 
         }, this.rand(2000, 8000))
         
         setInterval(()=>{
-            //a random person is added to the list every 5 seconds
-            if (this.flipCoin()) {
+            //a random person is added to the list every 5 seconds if list is short enough
+            if (this.state.waitingList.length < 5) {
                 PeopleApiService.addPerson(randomPerson())
                     .then(data => {
                         this.setState({waitingList: data})
